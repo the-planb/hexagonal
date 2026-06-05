@@ -1,0 +1,10 @@
+parameters: ~
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  PlanB\Hexagonal\:
+    resource: '../src'
+    exclude: '../src/Infrastructure/Bundle'
