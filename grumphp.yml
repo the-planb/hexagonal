@@ -1,0 +1,78 @@
+grumphp:
+  hooks_dir: ~
+  hooks_preset: local
+  git_hook_variables: {}
+  environment: { paths: ["tools"] }
+  stop_on_failure: true
+  ignore_unstaged_changes: true
+  hide_circumvention_tip: false
+  process_timeout: 60
+  parallel:
+    enabled: true
+    max_workers: 32
+
+  fixer:
+    enabled: true
+    fix_by_default: true
+
+  testsuites:
+    git_pre_commit:
+      tasks: [ composer_script, composer, rector, phpcsfixer, phpstan, phpunit, git_commit_message ]
+    git_pre_push:
+      tasks: [ phpunit, infection ]
+
+  tasks:
+    composer_script:
+      script: dump
+      triggered_by: [php, phtml]
+
+    composer:
+      strict: true
+      metadata:
+        priority: 150
+
+    rector:
+      config: 'rector.php'
+      triggered_by: [ 'php' ]
+      clear_cache: true
+      metadata:
+        priority: 110
+
+    phpcsfixer:
+      config: '.php-cs-fixer.dist.php'
+      triggered_by: ['php']
+      metadata:
+        priority: 100
+
+    phpstan:
+      configuration: "phpstan.neon"
+      level: 10
+      triggered_by: ["php"]
+      memory_limit: 512M
+      ignore_patterns:
+        - tests
+        - .php-cs-fixer.dist.php
+      metadata:
+        priority: 80
+
+    phpunit:
+      config_file: "phpunit.xml"
+      always_execute: false
+      metadata:
+        priority: 60
+
+    infection:
+      configuration: 'infection.json'
+      test_framework: phpunit
+      triggered_by: [ php ]
+      min_msi: 100
+      min_covered_msi: 100
+
+    git_commit_message:
+      enforce_capitalized_subject: false
+      matchers: []
+      type_scope_conventions:
+        types: ['build','ci','chore','docs','feat','fix','perf','refactor','revert']
+        scopes: []
+
+
