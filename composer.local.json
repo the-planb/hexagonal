@@ -1,0 +1,14 @@
+{
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../core",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "require": {
+        "planb/core": "dev-main as 1.0.0@dev"
+    }
+}

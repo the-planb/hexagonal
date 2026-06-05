@@ -1,0 +1,21 @@
+{
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "vendor",
+            "tests"
+        ]
+    },
+    "logs": {
+        "html": "var/coverage/infection.html",
+        "json": "var/report/infection.json"
+    },
+    "mutators": {
+        "@default": true,
+        "ReturnRemoval": false
+    },
+    "testFramework": "phpunit",
+    "bootstrap": "./vendor/autoload.php"
+}
