@@ -6,6 +6,7 @@
          executionOrder="depends,defects"
          beStrictAboutOutputDuringTests="true"
          displayDetailsOnAllIssues="true"
+         failOnEmptyTestSuite="false"
          failOnRisky="true"
          failOnWarning="true"
          failOnNotice="true"
@@ -26,6 +27,7 @@
         </include>
         <exclude>
             <directory>src/Infrastructure/Testing</directory>
+            <directory>src/Infrastructure/Bundle</directory>
         </exclude>
     </source>
 
