@@ -1,0 +1,82 @@
+{
+  "name": "planb/hexagonal",
+  "description": "planb transversal code",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jmpantoja",
+      "email": "jmpantoja@gmail.com"
+    }
+  ],
+  "scripts": {
+    "dump": "composer dump-autoload --optimize"
+  },
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "PlanB\\Hexagonal\\Core\\": "src/Core",
+      "PlanB\\Hexagonal\\Application\\": "src/Model/",
+      "PlanB\\Hexagonal\\Infrastructure\\": "src/Infrastructure/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PlanB\\Hexagonal\\Tests\\Doubles\\": "tests/Doubles/",
+      "PlanB\\Hexagonal\\Tests\\Unit\\": "tests/Unit/",
+      "PlanB\\Hexagonal\\Tests\\Integration\\": "tests/Integration/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin",
+    "allow-plugins": {
+      "wikimedia/composer-merge-plugin": true
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/the-planb/planb-core"
+    }
+  ],
+  "require": {
+    "php": ">=8.5",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "dg/bypass-finals": "^1.8",
+    "planb/core": "^1.0",
+    "jetbrains/phpstorm-attributes": "^1.0",
+    "wikimedia/composer-merge-plugin": "^2.1",
+    "symfony/event-dispatcher": "^8.1",
+    "symfony/dependency-injection": "^8.1",
+    "symfony/config": "^8.1",
+    "symfony/http-kernel": "^8.1",
+    "symfony/console": "^8.1",
+    "symfony/yaml": "^8.1",
+    "symfony/messenger": "^8.1",
+    "laravel/prompts": "^0.3.18",
+    "sabre/xml": "^4.1",
+    "symfony/finder": "^8.1"
+  },
+  "require-dev": {
+    "symfony/var-dumper": "^8.0",
+    "phpunit/phpunit": "^13.0",
+    "rector/rector": "^2.4"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "^8.0"
+    },
+    "merge-plugin": {
+      "include": [
+        "composer.local.json"
+      ],
+      "recurse": true,
+      "replace": true,
+      "ignore-duplicates": false,
+      "merge-dev": true,
+      "merge-extra": false
+    }
+  }
+}
