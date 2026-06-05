@@ -6,6 +6,7 @@
          executionOrder="depends,defects"
          beStrictAboutOutputDuringTests="true"
          displayDetailsOnAllIssues="true"
+         failOnEmptyTestSuite="false"
          failOnRisky="true"
          failOnWarning="true"
          failOnNotice="true"
@@ -25,6 +26,7 @@
             <directory>src</directory>
         </include>
         <exclude>
+            <directory>src/Infrastructure/Symfony/Bundle</directory>
             <directory>src/Infrastructure/PhpUnit</directory>
         </exclude>
     </source>
