@@ -24,5 +24,12 @@
         <include>
             <directory>src</directory>
         </include>
+        <exclude>
+            <directory>src/Infrastructure/Testing</directory>
+        </exclude>
     </source>
+
+    <extensions>
+        <bootstrap class="PlanB\Hexagonal\Infrastructure\Testing\BypassFinalsExtension"/>
+    </extensions>
 </phpunit>
