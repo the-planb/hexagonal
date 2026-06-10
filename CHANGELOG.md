@@ -1,5 +1,7 @@
 # Changelog
 
+## [0.1.0](https://github.com/the-planb/hexagonal/compare/0.0.1...0.1.0) (2026-06-10)
+
 ## 0.0.1 (2026-06-10)
 
 ### Features
