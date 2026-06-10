@@ -1,8 +1,7 @@
 {
   "git": {
     "commitMessage": "chore(release): v${version}\n\n[skip ci]",
-    "commitArgs": ["--no-verify"],
-    "pushArgs": ["--no-verify"]
+    "commitArgs": ["--no-verify"]
   },
   "plugins": {
     "@release-it/conventional-changelog": {
