@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PlanB\Hexagonal\Infrastructure\Symfony\Bundle\DependencyInjection;
 
+use PlanB\Hexagonal\Core\Cqrs\Command\CommandHandlerInterface;
 use PlanB\Hexagonal\Core\Cqrs\Event\EventHandlerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,6 +16,10 @@ final class PlanBHexagonalExtension extends Extension implements PrependExtensio
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $container->registerForAutoconfiguration(CommandHandlerInterface::class)
+            ->addTag('messenger.message_handler', ['bus' => 'command.bus'])
+        ;
+
         $container->registerForAutoconfiguration(EventHandlerInterface::class)
             ->addTag('messenger.message_handler', ['bus' => 'event.bus'])
         ;
