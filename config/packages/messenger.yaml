@@ -2,11 +2,16 @@ framework:
   messenger:
     routing:
       'PlanB\Hexagonal\Core\Cqrs\Command\CommandInterface': sync
+      'PlanB\Hexagonal\Core\Cqrs\Query\QueryInterface': sync
       'PlanB\Hexagonal\Core\Cqrs\Event\EventInterface': sync
 
     default_bus: command.bus
     buses:
       command.bus:
         default_middleware: true
+
+      query.bus:
+        default_middleware: true
+
       event.bus:
         default_middleware: allow_no_handlers

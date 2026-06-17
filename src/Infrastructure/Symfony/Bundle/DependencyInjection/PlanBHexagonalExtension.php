@@ -6,6 +6,7 @@ namespace PlanB\Hexagonal\Infrastructure\Symfony\Bundle\DependencyInjection;
 
 use PlanB\Hexagonal\Core\Cqrs\Command\CommandHandlerInterface;
 use PlanB\Hexagonal\Core\Cqrs\Event\EventHandlerInterface;
+use PlanB\Hexagonal\Core\Cqrs\Query\QueryHandlerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -18,6 +19,10 @@ final class PlanBHexagonalExtension extends Extension implements PrependExtensio
     {
         $container->registerForAutoconfiguration(CommandHandlerInterface::class)
             ->addTag('messenger.message_handler', ['bus' => 'command.bus'])
+        ;
+
+        $container->registerForAutoconfiguration(QueryHandlerInterface::class)
+            ->addTag('messenger.message_handler', ['bus' => 'query.bus'])
         ;
 
         $container->registerForAutoconfiguration(EventHandlerInterface::class)
