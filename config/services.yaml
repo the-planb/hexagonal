@@ -8,3 +8,18 @@ services:
   PlanB\Hexagonal\:
     resource: '../src'
     exclude: '../src/Infrastructure/Symfony/Bundle'
+
+  PlanB\Hexagonal\Core\Cqrs\Command\CommandBusInterface:
+    class: PlanB\Hexagonal\Infrastructure\Symfony\Cqrs\Command\CommandBus
+    arguments:
+      $commandBus: '@command.bus'
+
+  PlanB\Hexagonal\Core\Cqrs\Query\QueryBusInterface:
+    class: PlanB\Hexagonal\Infrastructure\Symfony\Cqrs\Query\QueryBus
+    arguments:
+      $queryBus: '@query.bus'
+
+  PlanB\Hexagonal\Core\Cqrs\Event\EventBusInterface:
+    class: PlanB\Hexagonal\Infrastructure\Symfony\Cqrs\Event\EventBus
+    arguments:
+      $eventBus: '@event.bus'

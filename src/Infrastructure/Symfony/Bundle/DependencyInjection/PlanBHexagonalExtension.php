@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace PlanB\Hexagonal\Infrastructure\Symfony\Bundle\DependencyInjection;
 
+use PlanB\Hexagonal\Core\Cqrs\Command\CommandHandlerInterface;
+use PlanB\Hexagonal\Core\Cqrs\Event\EventHandlerInterface;
+use PlanB\Hexagonal\Core\Cqrs\Query\QueryHandlerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -14,6 +17,18 @@ final class PlanBHexagonalExtension extends Extension implements PrependExtensio
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
+        $container->registerForAutoconfiguration(CommandHandlerInterface::class)
+            ->addTag('messenger.message_handler', ['bus' => 'command.bus'])
+        ;
+
+        $container->registerForAutoconfiguration(QueryHandlerInterface::class)
+            ->addTag('messenger.message_handler', ['bus' => 'query.bus'])
+        ;
+
+        $container->registerForAutoconfiguration(EventHandlerInterface::class)
+            ->addTag('messenger.message_handler', ['bus' => 'event.bus'])
+        ;
+
         $path = __DIR__ . '/../../../../../config';
         $loader = new YamlFileLoader($container, new FileLocator($path));
         $loader->load('services.yaml');
