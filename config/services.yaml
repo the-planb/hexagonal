@@ -23,3 +23,11 @@ services:
     class: PlanB\Hexagonal\Infrastructure\Symfony\Cqrs\Event\EventBus
     arguments:
       $eventBus: '@event.bus'
+
+  PlanB\Hexagonal\Core\FileSystem\Adapter\FileWriter:
+    arguments:
+      $writers: !tagged_iterator hexagonal.fs.writer
+
+  PlanB\Hexagonal\Core\FileSystem\Adapter\FileReader:
+    arguments:
+      $readers: !tagged_iterator hexagonal.fs.reader
