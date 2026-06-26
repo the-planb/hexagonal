@@ -7,6 +7,8 @@ namespace PlanB\Hexagonal\Infrastructure\Symfony\Bundle\DependencyInjection;
 use PlanB\Hexagonal\Core\Cqrs\Command\CommandHandlerInterface;
 use PlanB\Hexagonal\Core\Cqrs\Event\EventHandlerInterface;
 use PlanB\Hexagonal\Core\Cqrs\Query\QueryHandlerInterface;
+use PlanB\Hexagonal\Core\FileSystem\Adapter\FileReaderInterface;
+use PlanB\Hexagonal\Core\FileSystem\Adapter\FileWriterInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -27,6 +29,14 @@ final class PlanBHexagonalExtension extends Extension implements PrependExtensio
 
         $container->registerForAutoconfiguration(EventHandlerInterface::class)
             ->addTag('messenger.message_handler', ['bus' => 'event.bus'])
+        ;
+
+        $container->registerForAutoconfiguration(FileWriterInterface::class)
+            ->addTag('hexagonal.fs.writer')
+        ;
+
+        $container->registerForAutoconfiguration(FileReaderInterface::class)
+            ->addTag('hexagonal.fs.reader')
         ;
 
         $path = __DIR__ . '/../../../../../config';
